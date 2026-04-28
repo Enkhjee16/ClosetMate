@@ -2,13 +2,17 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="#F7F3EF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="80dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -22,9 +26,9 @@
         <ImageView
             android:id="@+id/imgClothing"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="180dp"
             android:background="#E5E0DA"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
             android:src="@android:drawable/ic_menu_gallery"
             android:contentDescription="Clothing item image"
             android:layout_marginBottom="12dp" />
@@ -48,31 +52,31 @@
             android:id="@+id/spinnerCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="10dp" />
 
         <Spinner
             android:id="@+id/spinnerColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="10dp" />
 
         <Spinner
             android:id="@+id/spinnerSeason"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="10dp" />
 
         <Spinner
             android:id="@+id/spinnerStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="10dp" />
 
         <Spinner
             android:id="@+id/spinnerOccasion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="10dp" />
 
         <Button
             android:id="@+id/btnSaveClothing"

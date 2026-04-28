@@ -81,10 +81,7 @@ public class AddClothingActivity extends AppCompatActivity {
             return;
         }
 
-        if (selectedImageUri == null) {
-            Toast.makeText(this, "Please choose an image", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        String imageUri = selectedImageUri != null ? selectedImageUri.toString() : "";
 
         String category = spinnerCategory.getSelectedItem().toString();
         String color = spinnerColor.getSelectedItem().toString();
@@ -94,7 +91,7 @@ public class AddClothingActivity extends AppCompatActivity {
 
         boolean inserted = databaseHelper.insertClothingItem(
                 name,
-                selectedImageUri.toString(),
+                imageUri,
                 category,
                 color,
                 season,
