@@ -13,6 +13,8 @@
         android:theme="@style/Theme.ClosetMate">
 
         <activity android:name=".AddClothingActivity" />
+        <activity android:name=".WardrobeActivity" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import android.database.Cursor;
+import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -70,5 +72,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLOTHING);
         onCreate(db);
+    }
+    public ArrayList<ClothingItem> getAllClothingItems() {
+        ArrayList<ClothingItem> clothingList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABLE_CLOTHING + " ORDER BY id DESC",
+                null
+        );
+
+        if (cursor.moveToFirst()) {
+            do {
+                ClothingItem item = new ClothingItem(
+                        cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("name")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("image_uri")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("category")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("color")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("season")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("style")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("occasion")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("wear_count")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("created_at"))
+                );
+
+                clothingList.add(item);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return clothingList;
     }
 }
