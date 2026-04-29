@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnAddClothing;
+    private Button btnAddClothing, btnWardrobe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,13 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        btnWardrobe = findViewById(R.id.btnWardrobe);
         btnAddClothing = findViewById(R.id.btnAddClothing);
+
+        btnWardrobe.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, WardrobeActivity.class);
+            startActivity(intent);
+        });
 
         btnAddClothing.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddClothingActivity.class);
