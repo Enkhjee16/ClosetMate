@@ -39,6 +39,19 @@
             android:layout_height="56dp"
             android:text="My Wardrobe"
             android:layout_marginBottom="12dp" />
+        <Button
+            android:id="@+id/btnCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Outfit Calendar"
+            android:layout_marginTop="12dp" />
+
+        <Button
+            android:id="@+id/btnAnalytics"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Analytics"
+            android:layout_marginTop="12dp" />
 
     </LinearLayout>
 </ScrollView>
