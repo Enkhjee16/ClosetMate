@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -49,11 +50,15 @@ public class AddClothingActivity extends AppCompatActivity {
         spinnerOccasion = findViewById(R.id.spinnerOccasion);
         btnChooseImage = findViewById(R.id.btnChooseImage);
         btnSaveClothing = findViewById(R.id.btnSaveClothing);
+        Button btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
 
         setupSpinners();
 
         btnChooseImage.setOnClickListener(v -> imagePickerLauncher.launch("image/*"));
         btnSaveClothing.setOnClickListener(v -> saveClothingItem());
+
+
     }
 
     private void setupSpinners() {

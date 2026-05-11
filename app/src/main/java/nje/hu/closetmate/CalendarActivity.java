@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,6 +54,9 @@ public class CalendarActivity extends AppCompatActivity {
         edtNotes = findViewById(R.id.edtNotes);
 
         btnSavePlan = findViewById(R.id.btnSavePlan);
+
+        Button btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
 
         selectedDate = getTodayDate();
 

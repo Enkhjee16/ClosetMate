@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Map;
+import android.widget.Button;
 
 public class AnalyticsActivity extends AppCompatActivity {
 
@@ -29,6 +30,8 @@ public class AnalyticsActivity extends AppCompatActivity {
         txtTotalPlans = findViewById(R.id.txtTotalPlans);
 
         txtCategoryCounts = findViewById(R.id.txtCategoryCounts);
+        Button btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
 
         loadAnalytics();
 

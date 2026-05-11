@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import android.widget.Button;
 
 public class WardrobeActivity extends AppCompatActivity {
 
@@ -27,6 +28,9 @@ public class WardrobeActivity extends AppCompatActivity {
         recyclerClothing = findViewById(R.id.recyclerClothing);
         txtEmpty = findViewById(R.id.txtEmpty);
         txtItemCount = findViewById(R.id.txtItemCount);
+        Button btnBack = findViewById(R.id.btnBack);
+
+        btnBack.setOnClickListener(v -> finish());
 
         databaseHelper = new DatabaseHelper(this);
 
