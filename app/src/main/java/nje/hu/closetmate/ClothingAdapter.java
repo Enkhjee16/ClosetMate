@@ -38,7 +38,11 @@ public class ClothingAdapter extends RecyclerView.Adapter<ClothingAdapter.Clothi
         holder.txtWearCount.setText("Worn " + item.getWearCount() + " times");
 
         if (item.getImageUri() != null && !item.getImageUri().isEmpty()) {
-            holder.imgItem.setImageURI(Uri.parse(item.getImageUri()));
+            try {
+                holder.imgItem.setImageURI(Uri.parse(item.getImageUri()));
+            } catch (Exception e) {
+                holder.imgItem.setImageResource(android.R.drawable.ic_menu_gallery);
+            }
         } else {
             holder.imgItem.setImageResource(android.R.drawable.ic_menu_gallery);
         }

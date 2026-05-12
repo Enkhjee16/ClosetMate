@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Button;
+import android.content.Intent;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -26,10 +27,16 @@ public class AddClothingActivity extends AppCompatActivity {
     private Uri selectedImageUri;
     private DatabaseHelper databaseHelper;
 
-    private final ActivityResultLauncher<String> imagePickerLauncher =
-            registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+    private final ActivityResultLauncher<String[]> imagePickerLauncher =
+            registerForActivityResult(new ActivityResultContracts.OpenDocument(), uri -> {
                 if (uri != null) {
                     selectedImageUri = uri;
+
+                    getContentResolver().takePersistableUriPermission(
+                            uri,
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    );
+
                     imgClothing.setImageURI(uri);
                 }
             });
@@ -55,7 +62,7 @@ public class AddClothingActivity extends AppCompatActivity {
 
         setupSpinners();
 
-        btnChooseImage.setOnClickListener(v -> imagePickerLauncher.launch("image/*"));
+        btnChooseImage.setOnClickListener(v -> imagePickerLauncher.launch(new String[]{"image/*"}));
         btnSaveClothing.setOnClickListener(v -> saveClothingItem());
 
 
