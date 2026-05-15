@@ -1,4 +1,3 @@
-// DatabaseHelper.java
 package nje.hu.closetmate;
 
 import android.content.ContentValues;
@@ -54,14 +53,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String createPlansTable = "CREATE TABLE IF NOT EXISTS " + TABLE_PLANS + " (" +
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PLANS + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "planned_date TEXT NOT NULL, " +
                 "outfit_name TEXT NOT NULL, " +
                 "notes TEXT" +
-                ");";
-
-        db.execSQL(createPlansTable);
+                ");");
     }
 
     public boolean insertClothingItem(String name, String imageUri, String category,
@@ -97,19 +94,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                ClothingItem item = new ClothingItem(
-                        cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("name")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("image_uri")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("category")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("color")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("season")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("style")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("occasion")),
-                        cursor.getInt(cursor.getColumnIndexOrThrow("wear_count")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("created_at"))
-                );
+                ClothingItem item = createClothingItemFromCursor(cursor);
+                clothingList.add(item);
+            } while (cursor.moveToNext());
+        }
 
+        cursor.close();
+        db.close();
+
+        return clothingList;
+    }
+
+    public ArrayList<ClothingItem> getClothingItemsByCategory(String category) {
+        ArrayList<ClothingItem> clothingList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABLE_CLOTHING + " WHERE category = ? ORDER BY id DESC",
+                new String[]{category}
+        );
+
+        if (cursor.moveToFirst()) {
+            do {
+                ClothingItem item = createClothingItemFromCursor(cursor);
                 clothingList.add(item);
             } while (cursor.moveToNext());
         }
@@ -136,10 +143,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public int getClothingItemCount() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_CLOTHING,
-                null
-        );
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_CLOTHING, null);
 
         int count = 0;
 
@@ -155,10 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public int getOutfitPlanCount() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_PLANS,
-                null
-        );
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_PLANS, null);
 
         int count = 0;
 
@@ -185,7 +186,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 String category = cursor.getString(0);
                 int count = cursor.getInt(1);
-
                 categoryCounts.put(category, count);
             } while (cursor.moveToNext());
         }
@@ -194,6 +194,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return categoryCounts;
+    }
+
+    private ClothingItem createClothingItemFromCursor(Cursor cursor) {
+        return new ClothingItem(
+                cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                cursor.getString(cursor.getColumnIndexOrThrow("name")),
+                cursor.getString(cursor.getColumnIndexOrThrow("image_uri")),
+                cursor.getString(cursor.getColumnIndexOrThrow("category")),
+                cursor.getString(cursor.getColumnIndexOrThrow("color")),
+                cursor.getString(cursor.getColumnIndexOrThrow("season")),
+                cursor.getString(cursor.getColumnIndexOrThrow("style")),
+                cursor.getString(cursor.getColumnIndexOrThrow("occasion")),
+                cursor.getInt(cursor.getColumnIndexOrThrow("wear_count")),
+                cursor.getString(cursor.getColumnIndexOrThrow("created_at"))
+        );
     }
 
     private String getCurrentDateTime() {

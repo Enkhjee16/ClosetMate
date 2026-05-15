@@ -57,7 +57,9 @@
             android:hint="Item name"
             android:inputType="textCapWords"
             android:autofillHints="name"
-            android:layout_marginTop="14dp" />
+            android:layout_marginTop="14dp"
+            android:textColor="#222222"
+            android:textColorHint="#777777"/>
 
         <Spinner
             android:id="@+id/spinnerCategory"

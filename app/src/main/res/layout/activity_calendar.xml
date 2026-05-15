@@ -1,114 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
-
     android:background="#F7F3EF">
 
     <LinearLayout
-
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
-
         android:orientation="vertical"
-
-        android:padding="24dp">
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="80dp">
 
         <Button
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:text="← Back"
             android:backgroundTint="#6F50B5"
             android:textColor="#FFFFFF"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="22dp" />
 
         <TextView
-
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
-
             android:text="Outfit Calendar"
-
             android:textSize="30sp"
-
             android:textStyle="bold"
-
             android:textColor="#222222"
-
             android:layout_marginBottom="16dp" />
 
         <CalendarView
-
             android:id="@+id/calendarView"
-
             android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-
-            android:layout_marginBottom="20dp" />
+            android:layout_height="330dp"
+            android:layout_marginBottom="18dp" />
 
         <TextView
-
             android:id="@+id/txtSelectedDate"
-
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
-
             android:text="Selected date:"
-
             android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="18dp" />
 
-            android:textColor="#555555"
-
-            android:layout_marginBottom="12dp" />
-
-        <EditText
-
-            android:id="@+id/edtOutfitName"
-
+        <TextView
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
+            android:text="Choose Outfit Items"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:layout_marginBottom="10dp" />
 
-            android:hint="Outfit name"
+        <Spinner
+            android:id="@+id/spinnerTop"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp" />
 
-            android:inputType="textCapWords"
+        <Spinner
+            android:id="@+id/spinnerBottom"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp" />
 
-            android:autofillHints="name" />
+        <Spinner
+            android:id="@+id/spinnerShoes"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp" />
+
+        <Spinner
+            android:id="@+id/spinnerAccessory"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp" />
 
         <EditText
-
             android:id="@+id/edtNotes"
-
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
-
             android:hint="Notes"
-
+            android:textColor="#222222"
+            android:textColorHint="#777777"
             android:inputType="textMultiLine"
-
-            android:minLines="3"
-
-            android:layout_marginTop="12dp" />
+            android:minLines="2"
+            android:layout_marginTop="16dp" />
 
         <Button
-
             android:id="@+id/btnSavePlan"
-
             android:layout_width="match_parent"
-
             android:layout_height="56dp"
-
             android:text="Save Outfit Plan"
-
-            android:layout_marginTop="20dp" />
+            android:backgroundTint="#CDB6FF"
+            android:textColor="#2E1B5B"
+            android:layout_marginTop="22dp" />
 
     </LinearLayout>
 </ScrollView>
